@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<title>HERP</title>
+	<style>
+	h1
+	{
+		text-align: center;
+	}
+	h2
+	{
+		text-align: center;
+	}
+	h3
+	{
+		text-align: center;
+	}
+	p
+	{
+		text-align: center;
+	}
+	#timedate
+	{
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		right: 0;
+		text-align: center;
+	}
+	#frame
+	{
+		width: 50%;
+		height: 750px;
+		margin: 0 auto;
+		display: block;
+	}
+	</style>
+	</head>
+	<body>
+
+  		<canvas id="c" width="900" height="900" class="lower-canvas" style="width: 900px; height: 900px;"></canvas>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.3.0/fabric.min.js"></script>
+		<script>
+			(function() {
+					var canvas = new fabric.Canvas('c');
+
+					var startX = 100;
+					var startY = 100;
+					
+					// create a triangle object
+					var triangle = new fabric.Triangle({
+					  left: startX,
+					  top: startY,
+					  fill: 'red',
+					  width: 20,
+					  height: 20,
+					  angle: 0
+					});
+					
+					function reset() {
+						canvas.clear();
+						triangle.set({ left: startX, top: startY });
+						triangle.setAngle(0);
+						canvas.add(triangle);
+						canvas.renderAll();
+					}
+
+					// "add" triangle onto canvas
+					canvas.add(triangle);
+					
+					function move(direction) {
+						//Calculate new coords
+						var y = Math.cos(triangle.getAngleInRadians()) * -direction;
+						var x = Math.sin(triangle.getAngleInRadians()) * direction;
+						//Set
+						triangle.set({ left: triangle.left + x, top: triangle.top + y });
+							
+						var path = new fabric.Path('M 0 0 L 0 1 L 1 1 L 1 0 Z');
+						path.set({ left: triangle.left, top: triangle.top });
+						
+						canvas.add(path);
+						triangle.bringToFront();
+					}
+					
+					fabric.Object.prototype.getAngleInRadians = function() {
+						return this.getAngle() / 180 * Math.PI;
+					};
+					
+					function rotate(direction) {
+						triangle.setAngle (triangle.getAngle() + direction);
+					}
+
+					var keyCodes = [];
+					document.onkeydown = document.onkeyup = function(e){
+					e = e || event;
+					keyCodes[e.keyCode] = e.type == 'keydown';
+						if (keyCodes[38]) {
+							move(1);
+						}
+						if (keyCodes[40]) {
+							move(-1);
+						}
+						if (keyCodes[37]) {
+							rotate(-1);
+						}
+						if (keyCodes[39]) {
+							rotate(1);
+						}
+						if (keyCodes[32]) {
+							reset();
+						}
+						canvas.renderAll();
+					}
+														
+			})();
+
+		</script>
+		
+	</body>
+</htmal>
