@@ -37,10 +37,6 @@
 	</style>
 		<!-- Make sure you've included jQuery before jquery-github-widget.js. -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-		<!-- Load jquery-github-widget default theme, or customize one of your own. Go ahead, it's well commented :D. -->
-		<link href="stylesheets/jquery-github-widget-default-theme.css" media="screen" rel="stylesheet" type="text/css">
-
 		<!-- Load jquery-github-widget.js. -->
 		<script src="javascripts/jquery-github-widget.js" type="text/javascript"></script>
 	</head>
@@ -61,7 +57,7 @@
 		<script>
 			$(function() {
 				$('#github-commits').githubInfoWidget(
-					{ user: 'SnubbleJr', repo: 'COMP2013' branch: 'master' });
+					{ user: 'SnubbleJr', repo: 'COMP2013Task3' branch: 'master', last:5 });
 			});
 		</script>
 		
