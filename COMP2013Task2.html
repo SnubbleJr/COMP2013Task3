@@ -46,6 +46,7 @@
 
 					var startX = 100;
 					var startY = 100;
+					var speed = 3;
 					
 					// create a triangle object
 					var triangle = new fabric.Triangle({
@@ -95,16 +96,16 @@
 					e = e || event;
 					keyCodes[e.keyCode] = e.type == 'keydown';
 						if (keyCodes[38]) {
-							move(1);
+							move(speed);
 						}
 						if (keyCodes[40]) {
-							move(-1);
+							move(-speed);
 						}
 						if (keyCodes[37]) {
-							rotate(-1);
+							rotate(-speed);
 						}
 						if (keyCodes[39]) {
-							rotate(1);
+							rotate(speed);
 						}
 						if (keyCodes[32]) {
 							reset();
